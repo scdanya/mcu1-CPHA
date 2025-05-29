@@ -1,0 +1,60 @@
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/orangepi/printer_1_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	192.168.0.0/16
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager DynamicMacros]
+type = git_repo
+path = ~/DynamicMacros
+origin = https://github.com/3DCoded/DynamicMacros.git
+primary_branch = main
+is_system_service = False
+install_script = install.sh
+
+[update_manager voron-klipper-extensions]
+type = git_repo
+path = ~/voron-klipper-extensions
+origin = https://github.com/voidtrance/voron-klipper-extensions.git
+install_script = install-extensions.sh
+managed_services = klipper
+
+[update_manager mainsail]
+path = /home/orangepi/mainsail
+repo = mainsail-crew/mainsail
+channel = stable
+type = web
+
+[update_manager mainsail-config]
+managed_services = klipper
+origin = https://github.com/mainsail-crew/mainsail-config.git
+path = /home/orangepi/mainsail-config
+primary_branch = master
+type = git_repo
+
+[update_manager moonraker-telegram-bot]
+install_script = scripts/install.sh
+requirements = scripts/requirements.txt
+env = /home/orangepi/moonraker-telegram-bot-env/bin/python
+origin = https://github.com/nlef/moonraker-telegram-bot.git
+path = /home/orangepi/moonraker-telegram-bot
+type = git_repo
+
